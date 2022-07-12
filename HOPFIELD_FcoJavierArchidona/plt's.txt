@@ -1,0 +1,41 @@
+//PARA DIBUJAR EL PATRON FINAL
+set xr[0:100]
+set yr[0:100]
+set palette gray
+plot 'estado_final.txt' matrix with image
+
+
+
+//PARA EL SOLAPAMIENTO
+set title "Solapamiento en funcion del numero de pasos Montecarlo"
+set key bottom right
+set xlabel "Pasos Montecarlo"
+set ylabel "Solapamiento"
+set yr[-1.1:1.1]
+plot 'solapamiento.txt' u 1:2 w l 
+
+
+
+//SOLAPAMIENTO EN FUNCION DE LA TEMPERATURA
+set title "Solapamiento en funcion del numero de pasos Montecarlo"
+set key bottom right
+set xlabel "Pasos Montecarlo"
+set ylabel "Solapamiento"
+set yr[-1.1:1.1]
+plot 'sol_T_0,0001.txt' u 1:2 w l title "T=10^{-4}", 'sol_T_0,001.txt' u 1:2 w l title "T=10^{-3}", 'sol_T_0,01.txt' u 1:2 w l title "T=10^{-2}", 'so
+l_T_0,1.txt' u 1:2 w l title "T=10^{-1}" 
+
+
+
+//PARA EL GIF
+unset key 
+set size square
+set xr[0:100]
+set yr[0:100]
+set palette gray 
+
+set output 'DEFORMADO.gif'
+
+set term gif animate delay 35
+
+do for [b=0:29] {plot 'datos.txt' i b matrix with image}
